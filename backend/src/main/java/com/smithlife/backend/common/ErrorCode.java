@@ -25,11 +25,16 @@ public enum ErrorCode {
     SLOT_FULL(HttpStatus.CONFLICT, "RESV_002", "해당 시간대가 만석입니다."),
     DUPLICATE_RESERVATION(HttpStatus.CONFLICT, "RESV_003", "이미 예약한 시간대입니다."),
     ALREADY_CANCELLED(HttpStatus.BAD_REQUEST, "RESV_004", "이미 취소된 예약입니다."),
+    SLOT_NOT_FOUND(HttpStatus.NOT_FOUND, "RESV_005", "해당 시간 슬롯을 찾을 수 없습니다."),
+    PAST_DATE_RESERVATION(HttpStatus.BAD_REQUEST, "RESV_006", "지난 날짜에는 예약할 수 없습니다."),
+    FACILITY_NOT_FOUND(HttpStatus.NOT_FOUND, "RESV_007", "시설을 찾을 수 없습니다."),
 
     // 운동 세션
     SESSION_NOT_FOUND(HttpStatus.NOT_FOUND, "SESS_001", "세션을 찾을 수 없습니다."),
     SESSION_ALREADY_ENDED(HttpStatus.BAD_REQUEST, "SESS_002", "이미 종료된 세션입니다."),
     NO_ACTIVE_SESSION(HttpStatus.NOT_FOUND, "SESS_003", "진행 중인 세션이 없습니다."),
+    SESSION_ALREADY_ACTIVE(HttpStatus.CONFLICT, "SESS_004", "이미 진행 중인 세션이 있습니다."),
+    EXERCISE_NOT_FOUND(HttpStatus.NOT_FOUND, "SESS_005", "운동을 찾을 수 없습니다."),
 
     // 루틴
     ROUTINE_NOT_FOUND(HttpStatus.NOT_FOUND, "RTN_001", "루틴을 찾을 수 없습니다."),
