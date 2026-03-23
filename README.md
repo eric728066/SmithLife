@@ -26,15 +26,10 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|
 | <img src="img/workout.png" width="120"/> | <img src="img/workout1.png" width="120"/> | <img src="img/workout2.png" width="120"/> | <img src="img/workout3.png" width="120"/> | <img src="img/workout4.png" width="120"/> | <img src="img/workout5.png" width="120"/> |
 
-### 공지사항
-| 공지 목록 | 공지 상세 |
-|:---:|:---:|
-| <img src="img/공지사항.png" width="180"/> | <img src="img/공지사항1.png" width="180"/> |
-
 ### 관리자
-| 관리자 홈 | 회원 관리 | 회원 등록 |
-|:---:|:---:|:---:|
-| <img src="img/admin.png" width="180"/> | <img src="img/admin_customer.png" width="180"/> | <img src="img/customer_register.png" width="180"/> |
+| 관리자 홈 | 회원 관리 | 회원 등록 | 공지사항 관리 | 공지사항 작성 |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src="img/admin.png" width="140"/> | <img src="img/admin_customer.png" width="140"/> | <img src="img/customer_register.png" width="140"/> | <img src="img/공지사항.png" width="140"/> | <img src="img/공지사항1.png" width="140"/> |
 
 <br>
 
