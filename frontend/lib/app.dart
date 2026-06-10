@@ -202,7 +202,7 @@ class SmithLifeApp extends ConsumerWidget {
         ),
         scaffoldBackgroundColor: AppColors.cream,
         useMaterial3: true,
-        fontFamily: 'GothicA1',
+        fontFamily: 'Pretendard',
       ),
       routerConfig: router,
       debugShowCheckedModeBanner: false,
