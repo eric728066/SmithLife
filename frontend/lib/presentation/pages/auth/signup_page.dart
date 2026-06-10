@@ -106,7 +106,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 _WhiteField(
                   controller: _phoneController,
                   hint: '전화번호 (010-0000-0000)',
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   inputFormatters: [_PhoneFormatter()],
                   validator: (v) =>
                       v == null || v.isEmpty ? '전화번호를 입력하세요' : null,
