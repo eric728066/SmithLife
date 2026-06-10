@@ -47,6 +47,12 @@ public class WorkoutSession {
     @Column(name = "total_calories", nullable = false, precision = 8, scale = 2)
     private BigDecimal totalCalories;
 
+    @Column(name = "total_exercises", nullable = false)
+    private Integer totalExercises;
+
+    @Column(name = "completed_exercises", nullable = false)
+    private Integer completedExercises;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;

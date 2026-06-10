@@ -45,6 +45,17 @@ public class Announcement {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    public void update(String title, String content, Tag tag, String imageUrl) {
+        this.title = title;
+        this.content = content;
+        this.tag = tag;
+        this.imageUrl = imageUrl;
+    }
+
+    public void deactivate() {
+        this.isActive = false;
+    }
+
     public enum Tag {
         NOTICE, EVENT
     }

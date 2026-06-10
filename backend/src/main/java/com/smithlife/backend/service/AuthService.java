@@ -113,4 +113,29 @@ public class AuthService {
         // TODO: 이메일 발송 기능 추가 (SMTP or 외부 서비스)
         log.info("Password reset requested for: {}", request.getEmail());
     }
+
+    // 전화번호 + 이름으로 비밀번호 재설정
+    @Transactional
+    public void resetPasswordByPhone(ResetPasswordByPhoneRequest request) {
+        User user = userRepository.findByPhone(request.getPhone())
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+
+        if (!user.getName().equals(request.getName())) {
+            throw new CustomException(ErrorCode.USER_NOT_FOUND);
+        }
+
+        User updated = User.builder()
+                .userId(user.getUserId())
+                .email(user.getEmail())
+                .passwordHash(passwordEncoder.encode(request.getNewPassword()))
+                .name(user.getName())
+                .phone(user.getPhone())
+                .profileImageUrl(user.getProfileImageUrl())
+                .role(user.getRole())
+                .isActive(user.getIsActive())
+                .build();
+
+        userRepository.save(updated);
+        log.info("Password reset by phone for user: {}", user.getEmail());
+    }
 }

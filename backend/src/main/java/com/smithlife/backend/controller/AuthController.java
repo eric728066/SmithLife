@@ -67,4 +67,11 @@ public class AuthController {
         authService.requestPasswordReset(request);
         return ResponseEntity.ok(ApiResponse.ok("비밀번호 재설정 이메일이 발송되었습니다."));
     }
+
+    // 전화번호 + 이름으로 비밀번호 재설정
+    @PostMapping("/reset-password")
+    public ResponseEntity<ApiResponse<Void>> resetPasswordByPhone(@Valid @RequestBody ResetPasswordByPhoneRequest request) {
+        authService.resetPasswordByPhone(request);
+        return ResponseEntity.ok(ApiResponse.ok("비밀번호가 변경되었습니다."));
+    }
 }
