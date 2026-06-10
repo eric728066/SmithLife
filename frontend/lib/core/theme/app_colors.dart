@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // 스플래시/로그인/회원가입 배경 - 황금오렌지
-  static const Color orangeBg = Color(0xFFE5A735);
+  static const Color orangeBg = Color(0xFFF7931E);
 
   // 앱 내부 배경 - 크림
   static const Color cream = Color(0xFFF5EDD8);
