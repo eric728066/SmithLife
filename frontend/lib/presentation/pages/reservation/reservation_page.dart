@@ -130,7 +130,7 @@ class _ReservationPageState extends ConsumerState<ReservationPage> {
         title: const Text(
           'SMITHLIFE',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 28,
             fontWeight: FontWeight.w900,
             color: AppColors.black,
             letterSpacing: 1,
