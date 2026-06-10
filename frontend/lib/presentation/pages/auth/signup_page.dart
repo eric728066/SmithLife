@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../viewmodels/auth_viewmodel.dart';
+
+class _PhoneFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final digits = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
+    final limited = digits.length > 11 ? digits.substring(0, 11) : digits;
+
+    String formatted;
+    if (limited.length <= 3) {
+      formatted = limited;
+    } else if (limited.length <= 7) {
+      formatted = '${limited.substring(0, 3)}-${limited.substring(3)}';
+    } else {
+      formatted = '${limited.substring(0, 3)}-${limited.substring(3, 7)}-${limited.substring(7)}';
+    }
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
+  }
+}
 
 class SignupPage extends ConsumerStatefulWidget {
   const SignupPage({super.key});
@@ -81,8 +105,9 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 const SizedBox(height: 12),
                 _WhiteField(
                   controller: _phoneController,
-                  hint: '전화번호',
-                  keyboardType: TextInputType.phone,
+                  hint: '전화번호 (010-0000-0000)',
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [_PhoneFormatter()],
                   validator: (v) =>
                       v == null || v.isEmpty ? '전화번호를 입력하세요' : null,
                 ),
@@ -168,6 +193,7 @@ class _WhiteField extends StatelessWidget {
   final String hint;
   final bool obscureText;
   final TextInputType keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
 
   const _WhiteField({
@@ -175,6 +201,7 @@ class _WhiteField extends StatelessWidget {
     required this.hint,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
+    this.inputFormatters,
     this.validator,
   });
 
@@ -184,6 +211,7 @@ class _WhiteField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       style: const TextStyle(color: AppColors.black, fontSize: 15),
       validator: validator,
       decoration: InputDecoration(
