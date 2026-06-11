@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../viewmodels/auth_viewmodel.dart';
+import 'privacy_policy_page.dart';
 
 class _PhoneFormatter extends TextInputFormatter {
   @override
@@ -41,6 +42,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _agreedToPrivacy = false;
 
   @override
   void dispose() {
@@ -53,6 +55,12 @@ class _SignupPageState extends ConsumerState<SignupPage> {
 
   Future<void> _signup() async {
     if (!_formKey.currentState!.validate()) return;
+    if (!_agreedToPrivacy) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('개인정보 수집·이용에 동의해주세요.')),
+      );
+      return;
+    }
     final success = await ref.read(authViewModelProvider.notifier).signup(
           email: _emailController.text.trim(),
           password: _passwordController.text,
@@ -135,7 +143,59 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                     textAlign: TextAlign.center,
                   ),
                 ],
-                const SizedBox(height: 32),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _agreedToPrivacy,
+                      onChanged: (v) =>
+                          setState(() => _agreedToPrivacy = v ?? false),
+                      activeColor: AppColors.black,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      side: BorderSide(
+                          color: AppColors.black.withOpacity(0.5), width: 1.5),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(
+                            () => _agreedToPrivacy = !_agreedToPrivacy),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: AppColors.black.withOpacity(0.8)),
+                            children: [
+                              const TextSpan(text: '(필수) '),
+                              WidgetSpan(
+                                child: GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            const PrivacyPolicyPage()),
+                                  ),
+                                  child: const Text(
+                                    '개인정보 수집·이용',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: AppColors.black,
+                                      color: AppColors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const TextSpan(text: '에 동의합니다'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
                 SizedBox(
                   height: 52,
                   child: ElevatedButton(

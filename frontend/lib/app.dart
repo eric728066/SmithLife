@@ -6,6 +6,7 @@ import 'core/theme/app_colors.dart';
 import 'presentation/pages/splash_page.dart';
 import 'presentation/pages/auth/login_page.dart';
 import 'presentation/pages/auth/signup_page.dart';
+import 'presentation/pages/auth/privacy_policy_page.dart';
 import 'presentation/pages/shell_page.dart';
 import 'presentation/pages/home/home_page.dart';
 import 'presentation/pages/reservation/reservation_page.dart';
@@ -56,6 +57,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/signup',
         builder: (context, state) => const SignupPage(),
+      ),
+      GoRoute(
+        path: '/privacy-policy',
+        builder: (context, state) => const PrivacyPolicyPage(),
       ),
       GoRoute(
         path: '/usage',
